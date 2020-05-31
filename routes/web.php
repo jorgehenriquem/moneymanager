@@ -11,6 +11,13 @@
 |
 */
 
+use Illuminate\Http\Response;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/healthcheck', function () {
+    $version = app()->version();
+    return new Response(["Server is running: {$version}"], Response::HTTP_OK);
 });
