@@ -21,3 +21,7 @@ Route::get('/healthcheck', function () {
     $version = app()->version();
     return new Response(["Server is running: {$version}"], Response::HTTP_OK);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
