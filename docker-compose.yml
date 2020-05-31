@@ -1,0 +1,28 @@
+version: "3.3"
+
+networks:
+  moneymanager:
+    external: true
+
+services:
+  money-manager:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:80"
+    networks:
+      - moneymanager
+
+  database:
+    image: postgres:12.1
+    environment:
+      POSTGRES_USER: "moneymanager"
+      POSTGRES_PASSWORD: "moneymanager"
+      POSTGRES_DB: "moneymanager"
+    ports:
+      - "6543:5432"
+    networks:
+      - moneymanager
